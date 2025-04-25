@@ -33,8 +33,10 @@ def get_LLM_response(proveedor,apikey,endpoint_model,user_prompt,system_prompt):
         {"role": "user", "content": user_prompt}
       ],
       api_key=apikey,
-      temperature=0,
-      presence_penalty=0,
+      temperature=0.2,
+      presence_penalty=0.3,
+      top_p=0.7,
+      frequency_penalty=1,
       ssl_verify=False  # Se pasa el parámetro adicional
       )
     return response.choices[0].message.content

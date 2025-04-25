@@ -4,7 +4,10 @@ from helpers.crear_indice import load_data
 from helpers.hacer_inferencia import get_similar_chunks
 from helpers.LLM_prompts import LLMs_system_prompts
 from helpers.hacer_inferencia import get_LLM_response
+from helpers.metrics import answer_chunks_metrics, answer_question_metrics
 import requests
+
+
 
 # Desactiva la verificación SSL
 old_init = requests.Session.__init__
@@ -17,7 +20,7 @@ load_dotenv()
 
 def responder_pregunta(question):
     ###### Parámetros
-    top_n = 3
+    top_n = 10
     ######
 
     # Parte 2: Responder preguntas
@@ -50,4 +53,13 @@ def responder_pregunta(question):
     )
 
     print(respuesta_LLM)
-    return respuesta_LLM
+
+    # Evluate chunks  (content) versus LLM response 
+    p, r, f1 = answer_chunks_metrics(respuesta_LLM, similar_chunks)
+
+    # Evluate if the answer actually responses to the question: question versus LLM response 
+    cos_qa = answer_question_metrics(question, respuesta_LLM)
+
+    return respuesta_LLM, similar_chunks, p, r, f1, cos_qa
+
+

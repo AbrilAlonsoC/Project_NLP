@@ -113,7 +113,7 @@ if prompt := st.chat_input("Ask something about the TV show Friends..."):
     )
 
     with st.spinner("..."):
-        response = responder_pregunta(prompt)
+        response,*_ = responder_pregunta(prompt)
 
     st.session_state.messages.append({"role": "assistant", "content": response})
     st.markdown(
