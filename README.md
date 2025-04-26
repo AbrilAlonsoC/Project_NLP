@@ -60,7 +60,7 @@ It looks like this:
 You can register and obtain a free API key here: https://openrouter.ai/.
 This ensures that you have your own usage quota and are not limited by a shared key.
 LLMsAPIkey_v7 = "your_openrouter_api_key_here"
-PYTHONHTTPSVERIFY = "0"
+
 ```
 ---
 
