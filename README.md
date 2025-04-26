@@ -28,6 +28,7 @@ It answers user questions by retrieving relevant script chunks and generating gr
 ---
 
 ## 🗂️ Repository Structure
+```
 root/
 ├── conversor.py                # Convert TXT scripts to Markdown.
 ├── index.py                    # Build the vector index (chunks + embeddings).
@@ -46,6 +47,7 @@ root/
 ├── Interfaz-Images/             # Background images for the Streamlit app.
 ├── .env                         # Environment file storing OpenRouter API key (not pushed to GitHub).
 └── requirements.txt             # Python dependencies required for the project.
+```
 
 
 
