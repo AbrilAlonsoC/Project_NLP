@@ -8,7 +8,6 @@ from helpers.hacer_inferencia import get_LLM_response
 # Cargamos una única vez el modelo SBERT
 _sbert = SentenceTransformer('all-MiniLM-L6-v2')
 
-
 def answer_chunks_metrics(respuesta_LLM, similar_chunks):
     # Extrae solo los textos de los chunks
     chunk_texts = [chunk[3] for chunk, _ in similar_chunks]  # chunk = (doc_id, name, num, text)
@@ -52,10 +51,6 @@ def answer_chunks_metrics(respuesta_LLM, similar_chunks):
 #     return p, r, f
 
 
-
-# # carga un modelo SBERT (solo una vez)
-# _sbert = SentenceTransformer('all-MiniLM-L6-v2')
-
 def answer_question_metrics(question: str, answer: str):
     q_emb = _sbert.encode(question, normalize_embeddings=True)
     a_emb = _sbert.encode(answer, normalize_embeddings=True)
@@ -63,3 +58,8 @@ def answer_question_metrics(question: str, answer: str):
     print(f"Relevance (SBERT cosine) = {cosine:.4f}")
     return cosine
 
+__all__ = [
+    "answer_chunks_metrics_compact",
+    "answer_question_metrics",
+    "exact_match_rate"
+]
