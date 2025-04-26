@@ -1,4 +1,3 @@
-# TODO
 # Friends TV Show Chatbot (RAG System)
 
 A lightweight multilingual Retrieval-Augmented Generation (RAG) chatbot based on the TV show Friends.  
