@@ -28,23 +28,25 @@ It answers user questions by retrieving relevant script chunks and generating gr
 ---
 
 ## 🗂️ Repository Structure
+root/
+├── conversor.py                # Convert TXT scripts to Markdown.
+├── index.py                    # Build the vector index (chunks + embeddings).
+├── inferencia_interfaz.py       # Backend to handle question answering logic.
+├── interfaz.py                  # Streamlit web app interface for the chatbot.
+├── helpers/                     # Folder containing all helper modules.
+│   ├── crear_indice.py          # Functions for chunking documents and creating embeddings.
+│   ├── hacer_inferencia.py      # Retrieval and LLM inference functions.
+│   ├── metrics.py               # Evaluation metrics (BERTScore, SBERT Cosine, Exact Match Rate).
+│   ├── LLM_prompts.py           # Custom system prompt for controlled LLM behavior.
+│   └── translation.py           # Language detection and translation using MarianMT models.
+├── data/                        # Folder with the script datasets.
+│   ├── scripts_friends/         # Original Friends TV show scripts in TXT format.
+│   └── scripts_friends_md/      # Converted scripts in Markdown format.
+├── Indice/                      # Folder where chunks and embeddings are saved.
+├── Interfaz-Images/             # Background images for the Streamlit app.
+├── .env                         # Environment file storing OpenRouter API key (not pushed to GitHub).
+└── requirements.txt             # Python dependencies required for the project.
 
-├── conversor.py              # Convert TXT scripts to Markdown
-├── index.py                  # Build the vector index (chunks + embeddings)
-├── inferencia_interfaz.py     # Backend for answering questions
-├── interfaz.py                # Streamlit chat interface
-├── helpers/
-│   ├── crear_indice.py        # Chunking and embedding helpers
-│   ├── hacer_inferencia.py    # Retrieval and LLM inference functions
-│   ├── metrics.py             # Evaluation metrics (BERTScore, SBERT Cosine, Exact Match Rate)
-│   ├── LLM_prompts.py         # System prompt definition
-│   ├── translation.py         # Language detection and translation (MarianMT)
-│
-├── data/scripts_friends/      # Original TXT scripts
-├── data/scripts_friends_md/   # Converted Markdown scripts
-├── Indice/                    # Saved chunks and embeddings
-├── Interfaz-Images/           # Background image for Streamlit app
-├── .env                       # API key (not pushed to GitHub)
 
 
 ---
