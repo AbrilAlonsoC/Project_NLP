@@ -5,6 +5,7 @@ import numpy as np
 from helpers.LLM_prompts import LLMs_system_prompts
 from helpers.hacer_inferencia import get_LLM_response
 
+# helpers/metrics.py
 
 def answer_chunks_metrics(respuesta_LLM, similar_chunks):
     # 1) Extrae solo los textos de los chunks
@@ -46,3 +47,8 @@ def answer_question_metrics(question: str, answer: str):
     print(f"Relevance (SBERT cosine) = {cosine:.4f}")
     return cosine
 
+__all__ = [
+    "answer_chunks_metrics_compact",
+    "answer_question_metrics",
+    "exact_match_rate"
+]

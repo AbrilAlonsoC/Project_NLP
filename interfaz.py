@@ -1,6 +1,13 @@
+import os
+import warnings
+
+warnings.filterwarnings("ignore")
+os.environ["PYTHONWARNINGS"] = "ignore"
+
 import streamlit as st
 import base64
 from inferencia_interfaz import responder_pregunta  # Your actual response function
+
 
 st.set_page_config(page_title="Friends Assistant", layout="centered", initial_sidebar_state="collapsed")
 
