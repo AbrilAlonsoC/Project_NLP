@@ -30,8 +30,8 @@ It answers user questions by retrieving relevant script chunks and generating gr
 ## 🗂️ Repository Structure
 ```
 root/
-├── conversor.py                # Convert TXT scripts to Markdown.
-├── index.py                    # Build the vector index (chunks + embeddings).
+├── conversor.py                 # Convert TXT scripts to Markdown.
+├── crear_indice.py              # Build the vector index (chunks + embeddings).
 ├── inferencia_interfaz.py       # Backend to handle question answering logic.
 ├── interfaz.py                  # Streamlit web app interface for the chatbot.
 ├── helpers/                     # Folder containing all helper modules.
@@ -73,7 +73,7 @@ python index.py
 ```
 streamlit run interfaz.py
 ````
-## Evaluation metrics 
+## 🔎 Evaluation metrics 
 
 * BERTScore: Measures alignment between generated responses and retrieved content.
 * SBERT Cosine Similarity: Measures semantic relevance between the question and the generated response.
