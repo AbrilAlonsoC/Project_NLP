@@ -8,6 +8,8 @@ from helpers.hacer_inferencia import get_LLM_response
 from helpers.metrics import answer_chunks_metrics, answer_question_metrics
 import requests
 import warnings
+import time
+
 warnings.filterwarnings("ignore")
 
 # Desactiva la verificación SSL
@@ -23,6 +25,9 @@ def responder_pregunta(question):
     ###### Parámetros
     top_n = 10
     ######
+
+    # Inicio del contador
+    start_time = time.time()
 
     # Detectar idioma original
     detected_lang = detect_language(question)
@@ -62,11 +67,17 @@ def responder_pregunta(question):
         respuesta_LLM = respuesta_LLM_en
 
     # Evluate chunks  (content) versus LLM response 
-    cos_ca = answer_chunks_metrics(respuesta_LLM, similar_chunks)
+    p, cos_ca = answer_chunks_metrics(respuesta_LLM, similar_chunks)
 
     # Evluate if the answer actually responses to the question: question versus LLM response 
     cos_qa = answer_question_metrics(question, respuesta_LLM)
 
-    return respuesta_LLM, similar_chunks, cos_ca, cos_qa
+    #  Fin del contador
+    end_time = time.time()
+
+    # Imprimir tiempo de respuesta
+    print(f"Time response: {end_time - start_time:.2f} seconds")
+
+    return respuesta_LLM, similar_chunks, p, cos_ca, cos_qa
 
 

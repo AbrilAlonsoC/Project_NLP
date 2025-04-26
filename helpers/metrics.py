@@ -12,6 +12,24 @@ def answer_chunks_metrics(respuesta_LLM, similar_chunks):
     # Extrae solo los textos de los chunks
     chunk_texts = [chunk[3] for chunk, _ in similar_chunks]  # chunk = (doc_id, name, num, text)
 
+    # 2) Prepara listas para BERTScore
+    candidates = [respuesta_LLM]
+    references = [chunk_texts]
+
+    # 3) Llama a score
+    P, *_ = score(
+        candidates,
+        references,
+        lang="en",
+        model_type="bert-base-uncased",
+        rescale_with_baseline=True
+    )
+
+    p = P.mean().item()
+
+    # Imprime en consola 
+    print(f"Precision: {p:.4f}")
+
     #  Calcula también SBERT cosine entre respuesta y los chunks juntos
     chunks_text = " ".join(chunk_texts)  # Juntamos todos los chunks como si fueran un documento
     resp_emb = _sbert.encode(respuesta_LLM, normalize_embeddings=True)
@@ -20,7 +38,7 @@ def answer_chunks_metrics(respuesta_LLM, similar_chunks):
 
     print(f"Response-Chunks Cosine Similarity: {cosine:.4f}")
 
-    return cosine
+    return p, cosine
 
 # def answer_chunks_metrics(respuesta_LLM, similar_chunks):
 #     # 1) Extrae solo los textos de los chunks
