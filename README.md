@@ -49,8 +49,19 @@ root/
 └── requirements.txt             # Python dependencies required for the project.
 ```
 
+---
+## 🔑 OpenRouter API Key Setup
 
+An example `.env` file is already included in the repository.  
+It looks like this:
 
+```ini
+# Replace this API key with your own OpenRouter key to avoid hitting shared usage limits (200 requests per user).
+You can register and obtain a free API key here: https://openrouter.ai/.
+This ensures that you have your own usage quota and are not limited by a shared key.
+LLMsAPIkey_v7 = "your_openrouter_api_key_here"
+PYTHONHTTPSVERIFY = "0"
+```
 ---
 
 ## ⚙️ How to Run
