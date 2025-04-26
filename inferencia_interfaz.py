@@ -55,11 +55,11 @@ def responder_pregunta(question):
     print(respuesta_LLM)
 
     # Evluate chunks  (content) versus LLM response 
-    p, r, f1 = answer_chunks_metrics(respuesta_LLM, similar_chunks)
+    cos_ca = answer_chunks_metrics(respuesta_LLM, similar_chunks)
 
     # Evluate if the answer actually responses to the question: question versus LLM response 
     cos_qa = answer_question_metrics(question, respuesta_LLM)
 
-    return respuesta_LLM, similar_chunks, p, r, f1, cos_qa
+    return respuesta_LLM, similar_chunks, cos_ca, cos_qa
 
 
