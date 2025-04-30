@@ -10,6 +10,6 @@ dotenv
 requests==2.32.3
 litellm==1.65.4.post1
 streamlit==1.44.1
-bert-score  # Metrics
+bert-score  
 langdetect 
 sentencepiece

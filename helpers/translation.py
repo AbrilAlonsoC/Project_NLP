@@ -21,16 +21,16 @@ REVERSE_LANGUAGES = {
 
 
 
-# Función para detectar el idioma de la pregunta
+# Function to detect the language of the question
 from langdetect import detect
 
 def detect_language(text):
     return detect(text)
 
-# Traducir a inglés
+# Translate to English
 def translate_to_english(text, source_lang):
     if source_lang not in SUPPORTED_LANGUAGES:
-        return text  # Devuelve el texto tal cual si no soportado
+        return text   # Return the text as is if not supported
     
     model_name = SUPPORTED_LANGUAGES[source_lang]
     tokenizer = MarianTokenizer.from_pretrained(model_name)
@@ -40,10 +40,10 @@ def translate_to_english(text, source_lang):
     tgt_text = tokenizer.batch_decode(translated, skip_special_tokens=True)[0]
     return tgt_text
 
-# Traducir de inglés al idioma original
+# Translate back to the original language
 def translate_to_original(text, target_lang):
     if target_lang not in REVERSE_LANGUAGES:
-        return text  # Devuelve el texto en inglés si no soportado
+        return text  # Return the text as is if not supported
     
     model_name = REVERSE_LANGUAGES[target_lang]
     tokenizer = MarianTokenizer.from_pretrained(model_name)

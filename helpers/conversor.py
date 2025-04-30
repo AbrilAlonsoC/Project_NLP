@@ -3,23 +3,23 @@ import glob
 
 def convertir_txt_a_md(origen, destino):
     """
-    Recorre todos los archivos .txt en 'origen' y crea archivos .md en 'destino' copiando su contenido.
+    Go through all .txt files in 'origen' and create .md files in 'destino' copying their content.
     """
-    # Crear la carpeta destino si no existe
+    # Create the destination folder if it doesn't exist
     os.makedirs(destino, exist_ok=True)
     
-    # Buscar todos los archivos .txt en la carpeta de origen
+    # Search for all .txt files in the source directory
     archivos_txt = glob.glob(os.path.join(origen, "*.txt"))
     
     for archivo in archivos_txt:
-        # Obtener solo el nombre del archivo sin ruta
+        # Obtain the base name of the file (e.g., "script1.txt")
         nombre_archivo = os.path.basename(archivo)
-        # Extraer el nombre sin extensión
+        # Get the file name without extension (e.g., "script1")
         nombre_sin_ext, _ = os.path.splitext(nombre_archivo)
-        # Definir la ruta del nuevo archivo con extensión .md
+        # Define the new file name with .md extension
         archivo_md = os.path.join(destino, nombre_sin_ext + ".md")
         
-        # Leer el contenido del archivo TXT y escribirlo en el nuevo archivo MD
+        # Read the content of the .txt file and write it to the .md file
         with open(archivo, 'r', encoding='utf-8') as f_in:
             contenido = f_in.read()
             
@@ -29,9 +29,9 @@ def convertir_txt_a_md(origen, destino):
         print(f"Convertido: {archivo} --> {archivo_md}")
 
 if __name__ == "__main__":
-    # Carpeta origen con los archivos .txt
+    # Folder where the .txt files are located
     carpeta_origen = r".\data\scripts_friends"
-    # Carpeta destino donde se guardarán los archivos .md. Puedes cambiar el nombre de la carpeta destino.
+    # Folder where the .md files will be created
     carpeta_destino = r".\data\scripts_friends_md"
     
     convertir_txt_a_md(carpeta_origen, carpeta_destino)

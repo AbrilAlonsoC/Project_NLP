@@ -11,7 +11,7 @@ from inferencia_interfaz import responder_pregunta  # Your actual response funct
 
 st.set_page_config(page_title="Friends Assistant", layout="centered", initial_sidebar_state="collapsed")
 
-# === Apply styles and full-page background ===
+# Apply styles and full-page background
 def apply_styles():
     with open("Interfaz-Images/a.png", "rb") as image_file:
         encoded_image = base64.b64encode(image_file.read()).decode()
@@ -81,11 +81,11 @@ apply_styles()
 
 st.title("Welcome to Friends' Chatbot")
 
-# === Initialize chat history ===
+# Initialize chat history
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# === Display chat history ===
+# Display chat history 
 for msg in st.session_state.messages:
     if msg["role"] == "user":
         st.markdown(
@@ -107,7 +107,7 @@ for msg in st.session_state.messages:
             unsafe_allow_html=True
         )
 
-# === Chat input ===
+# Chat input 
 if prompt := st.chat_input("Ask something about the TV show Friends..."):
     st.session_state.messages.append({"role": "user", "content": prompt})
     st.markdown(

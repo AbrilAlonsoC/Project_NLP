@@ -16,13 +16,13 @@ requests.Session.__init__ = new_init
 
 
 
-###### Parámetros
+###### Parameters
 chunk_size=100
 chunk_overlap=20
 model_embeddings="distiluse-base-multilingual-cased-v2"
 ######
 
-# Parte 1: Procesar todos los archivos md y guardar los datos
+# Process all Markdown files in the specified directory and save data
 script_dir = os.path.dirname(os.path.abspath(__file__)) # Path de este script
 carpeta_path = os.path.join(script_dir, 'data/scripts_friends_md')
 save_folder = os.path.join(script_dir, 'Indice')

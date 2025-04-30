@@ -14,7 +14,7 @@ requests.Session.__init__ = new_init
 
 
 
-# Función para obtener los chunks más similares
+# Function to get the most similar chunks
 def get_similar_chunks(question, chunks, embeddings, model, top_n):
     question_embedding = model.encode([question])
     similarities = cosine_similarity(question_embedding, embeddings)[0]
@@ -22,7 +22,7 @@ def get_similar_chunks(question, chunks, embeddings, model, top_n):
     return [(chunks[i], similarities[i]) for i in top_indices]
 
 
-# Función para obtener la respuesta de un LLM
+# Function to get the response from a LLM
 def get_LLM_response(proveedor,apikey,endpoint_model,user_prompt,system_prompt):
 
   try:
@@ -37,26 +37,26 @@ def get_LLM_response(proveedor,apikey,endpoint_model,user_prompt,system_prompt):
       presence_penalty=0.3,
       top_p=0.7,
       frequency_penalty=1,
-      ssl_verify=False  # Se pasa el parámetro adicional
+      ssl_verify=False  
       )
     return response.choices[0].message.content
   
   except requests.exceptions.RequestException as e:
-    # Manejar errores de red o del servidor
+    # Deal with network or server errors
     print(f"Error de red o del servidor: {e}")
     return "ERROR"
 
   except (KeyError, IndexError) as e:
-    # Manejar errores de estructura de respuesta inesperada
+    # Manage unexpected response structure errors
     print(f"Error en la estructura de la respuesta: {e}")
     return "ERROR"
 
   except json.JSONDecodeError as e:
-    # Manejar errores de decodificación JSON
+    # Manage JSON decoding errors
     print(f"Error al decodificar la respuesta JSON: {e}")
     return "ERROR"
 
   except Exception as e:
-    # Capturar cualquier otro error no previsto
+    # Capture any other unexpected error
     print(f"Error inesperado: {e}")
     return "ERROR"

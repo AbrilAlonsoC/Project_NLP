@@ -1,5 +1,5 @@
 
-# Función para guardar los system prompts de los LLMs utilizados
+# Function to save the system prompts of the LLMs used
 def LLMs_system_prompts(use_case,LLMused,version):
   if use_case=="elaborate_responses":
     system_prompt="""

@@ -11,7 +11,7 @@ def new_init(self):
  
 requests.Session.__init__ = new_init
 
-# Función para procesar todos los archivos Markdown
+# Function to process all Markdown files in a directory
 def process_all_markdown_files(carpeta_path, chunk_size, chunk_overlap):
     files = os.listdir(carpeta_path)
     files_array = sorted([file for file in files if os.path.isfile(os.path.join(carpeta_path, file)) 
@@ -26,13 +26,14 @@ def process_all_markdown_files(carpeta_path, chunk_size, chunk_overlap):
 
     return all_chunks
 
-# Función para procesar archivos Markdown
+
+# Function to process Markdown files
 def process_markdown(file_path, doc_id, doc_name, chunk_size, chunk_overlap):
     try:
         with open(file_path, 'r', encoding='utf-8') as file:
             text = file.read()
 
-        # Dividir el texto en chunks
+        # Divide the text into chunks
         words = text.split()
         chunks = []
         for i in range(0, len(words), chunk_size - chunk_overlap):
@@ -44,13 +45,13 @@ def process_markdown(file_path, doc_id, doc_name, chunk_size, chunk_overlap):
         print(f"Error al procesar el Markdown {doc_name}: {e}")
         return []
 
-# Función para crear embeddings
+# Function to create embeddings
 def create_embeddings(chunks, model_embeddings):
     model = SentenceTransformer(model_embeddings)
     embeddings = model.encode([chunk[3] for chunk in chunks])
     return embeddings, model
 
-# Función para guardar datos en Google Drive
+# Function to save data
 def save_data(chunks, embeddings, model, save_folder):
     os.makedirs(save_folder, exist_ok=True)
     with open(os.path.join(save_folder, 'chunks_with_ids.pkl'), 'wb') as f:
@@ -60,7 +61,7 @@ def save_data(chunks, embeddings, model, save_folder):
     with open(os.path.join(save_folder, 'model.pkl'), 'wb') as f:
         pickle.dump(model, f)
 
-# Función para cargar datos
+# Function to load data
 def load_data(save_folder):
     with open(os.path.join(save_folder, 'chunks_with_ids.pkl'), 'rb') as f:
         chunks = pickle.load(f)

@@ -12,7 +12,7 @@ import time
 
 warnings.filterwarnings("ignore")
 
-# Desactiva la verificación SSL
+# Desactivate SSL verification 
 old_init = requests.Session.__init__
 def new_init(self):
     old_init(self)
@@ -22,23 +22,23 @@ requests.Session.__init__ = new_init
 load_dotenv()
 
 def responder_pregunta(question):
-    ###### Parámetros
+    ###### Parameters
     top_n = 10
     ######
 
-    # Inicio del contador
+    # Start the timer
     start_time = time.time()
 
-    # Detectar idioma original
+    # Detect the original language
     detected_lang = detect_language(question)
     
-    # Traducir a inglés si es necesario
+    # Translate to English if the detected language is not English
     if detected_lang != "en":
         question_en = translate_to_english(question, detected_lang)
     else:
         question_en = question
 
-    # Parte 2: Responder preguntas
+    # Answer the question using the LLM
     script_dir = os.path.dirname(os.path.abspath(__file__))  
     save_folder = os.path.join(script_dir, 'Indice')
 
@@ -60,22 +60,22 @@ def responder_pregunta(question):
         system_prompt
     )
 
-    # Traducir de vuelta a idioma original si necesario
+    # Translate the LLM response back to the original language if it was translated
     if detected_lang != "en":
         respuesta_LLM = translate_to_original(respuesta_LLM_en, detected_lang)
     else:
         respuesta_LLM = respuesta_LLM_en
 
-    # Evluate chunks  (content) versus LLM response 
+    # Evluate chunks (content) versus LLM response 
     p, cos_ca = answer_chunks_metrics(respuesta_LLM, similar_chunks)
 
     # Evluate if the answer actually responses to the question: question versus LLM response 
     cos_qa = answer_question_metrics(question, respuesta_LLM)
 
-    #  Fin del contador
+    # End timer
     end_time = time.time()
 
-    # Imprimir tiempo de respuesta
+    # Print time response
     print(f"Time response: {end_time - start_time:.2f} seconds")
 
     return respuesta_LLM, similar_chunks, p, cos_ca, cos_qa
