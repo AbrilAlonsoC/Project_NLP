@@ -48,7 +48,7 @@ root/
 ├── .env                         # Environment file storing OpenRouter API key (not pushed to GitHub).
 ├── Requirements/
 │   ├── requirements.txt          # Python dependencies required for the project.
-│   └── requirements.txt          # Python dependencies required for the project.
+│   └── requirements_mac.txt          # Python dependencies required for the project.
 
 ```
 
@@ -56,13 +56,11 @@ root/
 ## OpenRouter API Key Setup
 
 An example `.env` file is already included in the repository. 
-You can use the API key we provide or else you can register and obtain a free API key here: https://openrouter.ai/.
+You can use the API key we provide here: `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`, else you can register and obtain a free API key here: https://openrouter.ai/. Register > Profile > Keys > Create Key (insert any name) > Copy your key.
 This ensures that you have your own usage quota and are not limited by a shared key.
 
 ```ini
-# Replace this API key with your own OpenRouter key to avoid hitting usage limits.
-LLMsAPIkey_v7 = "your_openrouter_api_key_here"
-
+LLMsAPIkey_v7 = "YOUR API KEY HERE"
 ```
 ---
 
@@ -73,13 +71,13 @@ LLMsAPIkey_v7 = "your_openrouter_api_key_here"
 ```
 pip install -r Requirements/requirements.txt  
 ```
+
 2. Make sure the `.env` file is in the root directory
 
-3. Build the `chunks_with_ids.pkl`,`embedding.pkl`, and `model.pkl` files. 
+3. Build the `chunks_with_ids.pkl`,`embedding.pkl`, and `model.pkl` files by running the following command. 
 ```
 python crear_indice.py
 ``` 
-Else paste into the root directory the provided folder `Indice` already extracted.
 
 4. Launch the chatbot interface:
 ```
